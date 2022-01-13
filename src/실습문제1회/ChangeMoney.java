@@ -25,7 +25,7 @@ public class ChangeMoney {
 		
 		//처리 단계 => 인간의 논리적인 사고(logic) => 제어문을 잘 조합시키는 것 => 경험치
 		//[예] 입력한 금액이 => 65750
-		for (int i = 0; i < arrMoney.length; i++) {
+		for (int i = 0; i < arrMoney.length; i++) {  //일반 for문
 			int num = Money / arrMoney[i];  //5만원권은 몫이 1개
 			//나머지 금액 => 15750
 			int remainder = Money % arrMoney[i];  //나머지값 구하기
