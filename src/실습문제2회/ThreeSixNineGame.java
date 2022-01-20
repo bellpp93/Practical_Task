@@ -3,33 +3,39 @@ package 실습문제2회;
 import java.util.Scanner;
 
 public class ThreeSixNineGame {
-
 	public static void main(String[] args) {
+		//준비 단계
+		String inputNum;
+		int count = 0;
+		int noOf369_count = 0;
+		
+		//입력 단계
+		System.out.println("1~9999 사이의 값을 입력하세요 >>> ");
 		Scanner scan = new Scanner(System.in);
-		int num;
-		System.out.println("1~9999 중의 정수 하나를 입력");
-		num = scan.nextInt();
-		if (num == 3 || num == 6 || num == 9) {
-			System.out.println("박수짝");
-		} else if (num >= 10) {
-			if ((num % 10) == 3 || (num % 10) == 6 || (num % 10) == 9) {
-				if (num / 10 == 3 || num / 10 == 6 || num / 10 == 9)
-					System.out.println("박수짝짝");
-				else
-					System.out.println("박수짝");
-			} else if (num / 10 == 3 || num / 10 == 6 || num / 10 == 9)
-				System.out.println("박수짝");
+		inputNum = scan.next();
+		
+		//처리 단계
+		if (inputNum.length() <= 4) {
+			for (int i = 0; i < inputNum.length(); i++) {
+				if (inputNum.charAt(i) - 48 == 3 || inputNum.charAt(i) - 48 == 6 || inputNum.charAt(i) - 48 == 9) {
+					count = count + 1;
+				}
+				if (inputNum.charAt(i) - 48 != 3 || inputNum.charAt(i) - 48 != 6 || inputNum.charAt(i) - 48 != 9) {
+					noOf369_count = noOf369_count + 1;
+				}
+			}
+		}
+		if (count > 0) {
+			System.out.print("박수");
+			for (int j = 0; j < count; j++) {
+				System.out.print("짝");
+			}
+		}
+		if (noOf369_count > 0 && count == 0) {
+			System.out.println("입력된 값에 3,6,9가 없습니다.");
+		}
+		if (inputNum.length() > 4) {
+			System.out.println("입력된 값이 범위를 초과 하였습니다.");
 		}
 	}
 }
-/*
-for (int i = 1; i <= 9999; i++) {
-	if ((i % 10) == 3 || (i % 10) == 6 || (i % 10) == 9) {
-		if (i / 10 == 3 || i / 10 == 6 || i / 10 == 9)
-			System.out.println(i + " 박수짝짝");// 자릿수 모두
-		else
-			System.out.println(i + " 박수짝");// 1의 자릿수만
-	} else if (i / 10 == 3 || i / 10 == 6 || i / 10 == 9)
-		System.out.println(i + " 박수짝");// 10의 자릿수만
-}
-*/

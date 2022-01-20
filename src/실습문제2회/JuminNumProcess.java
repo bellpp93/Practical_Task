@@ -1,41 +1,44 @@
 package 실습문제2회;
 
 import java.util.Scanner;
+import java.util.Spliterator;
 
 public class JuminNumProcess {
 
 	public static void main(String[] args) {
-		String juminNum;
-		int sum = 0;
-		int temp, result;
-		int[] weight = {2, 3, 4, 5, 6, 7, 0, 8, 9, 2, 3, 4, 5};
+//		준비 단계 => 변수 선언, 배열 선언 => 메모리의 일부(그릇)
+		//(참조변수 주소값)
+		String juminNum;  //키보드로부터 입력한 주민번호 문자열 객체의 주소값이 담겨질 객체 참조변수
 		
-		System.out.print("주민번호 입력: ");
+//		입력 단계
+		System.out.print("주민번호 입력 >>> ");
 		Scanner scan = new Scanner(System.in);
-		juminNum = scan.nextLine();
+		juminNum = scan.next();
 		
-		for (int i = 0; i < 13; i++) {  
-			if(juminNum.charAt(i) == '-') continue;
-				sum = sum + (juminNum.charAt(i)-48) * weight[i];  			
-		}
-		temp = 11 - (sum%11);  
-		result = temp%10;
-		System.out.println();
+//		처리 단계 => 제어문들의 조합(if문, switch문, for문, while문, continue, break 등) => logic
+		//logic => 인간의 논리적인 사고 => 주어진 문제를 어떻게 해결할것인지 고민?
+		String frontJumin = juminNum.substring(0, 6);
+		String backJumin = juminNum.substring(7, 14);
 		
-//		substring() 메소드 사용
-		String frontString = juminNum.substring(0, 6);
-		System.out.println("주민번호앞자리: " + frontString);
+//		출력 단계
+		System.out.println("주민번호 앞 6자리: " + frontJumin);
+		System.out.println("주민번호 뒤 7자리: " + backJumin);
 		
-		String backString = juminNum.substring(7, 14);
-		System.out.println("주민번호뒷자리: " + backString);
+		System.out.println();  //줄바꿈
+		//[해결 방법2]
+		String[] token = juminNum.split("-");
+		String frontString = token[0];
+		String backString = token[1];
 		
-		System.out.println();
+		System.out.println("주민번호 앞 6자리: " + frontString);
+		System.out.println("주민번호 뒤 7자리: " + backString);
 		
-//		split() 메소드 사용
-		String[] sp = juminNum.split("-");
+		System.out.println();  //줄바꿈
+		//[중요] 실무 사례
+		//"971025-1054171" => "971025-1******" => 마스킹(masking) 처리
+		String juminNumMasking = backString.replace(backString.substring(1), "******");
 		
-		for (int i = 0; i < sp.length; i++) {
-			System.out.println(sp[i]);
-		}	
+		System.out.println("<< 주민번호 뒤자리 마스킹 처리하기 >>");
+		System.out.println(frontString + "-" + juminNumMasking);
 	}
 }
